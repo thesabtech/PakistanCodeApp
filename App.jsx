@@ -1,16 +1,8 @@
-import React, {useEffect, useState} from 'react';
-import {
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-  useColorScheme,
-} from 'react-native';
+import React from 'react';
+import {Image, StatusBar, StyleSheet, View, useColorScheme} from 'react-native';
 
 import * as eva from '@eva-design/eva';
 import {ApplicationProvider, IconRegistry} from '@ui-kitten/components';
-import axios from 'axios';
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {BottomNavigationAccessoriesShowcase} from './components/BottomTabs';
@@ -46,24 +38,10 @@ function App() {
 }
 
 const styles = StyleSheet.create({
-  contentView: {
-    flex: 1,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
+  header: {
+    height: 40,
+    borderBottomColor: 'gray',
+    borderBottomWidth: 1,
   },
 });
 

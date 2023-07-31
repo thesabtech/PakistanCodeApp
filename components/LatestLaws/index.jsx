@@ -1,20 +1,28 @@
-import {Text} from '@ui-kitten/components';
 import React, {useEffect} from 'react';
 import {Button, StyleSheet, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {fetchLaws} from '../../store/actions/lawsActions';
-import SingleLaw from '../SingleLaw';
-import {Screen} from 'react-native-screens';
+import {useNavigation} from '@react-navigation/native';
 
 const LatestLaws = () => {
   const dispatch = useDispatch();
   const laws = useSelector(state => state.laws.laws);
   const loading = useSelector(state => state.loading);
 
+  const navigation = useNavigation();
+
+  const handlePress = law => {
+    const simplifiedLaw = {
+      title_act_help: law.title_act_help,
+      ACTID_help: law.ACTID_help,
+    };
+    navigation.navigate('SingleLaw', {law: simplifiedLaw});
+  };
+
   useEffect(() => {
     dispatch(fetchLaws());
   }, [dispatch]);
-  // Filtering laws based on SQL query conditions
+
   const filteredLaws = laws
     .filter(
       law =>
@@ -35,6 +43,7 @@ const LatestLaws = () => {
         <View style={styles.lawList}>
           {filteredLaws?.map(law => (
             <Button
+              onPress={() => handlePress(law)}
               style={styles.lawUrl}
               title={law.title_act_help}
               key={law.ACTID_help}>
