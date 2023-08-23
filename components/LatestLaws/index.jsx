@@ -15,6 +15,7 @@ const LatestLaws = () => {
     const simplifiedLaw = {
       title_act_help: law.title_act_help,
       ACTID_help: law.ACTID_help,
+      lawFile: JSON.stringify(law.title_act_help),
     };
     navigation.navigate('SingleLaw', {law: simplifiedLaw});
   };
@@ -59,6 +60,7 @@ const LatestLaws = () => {
 const styles = StyleSheet.create({
   lawLoader: {
     flex: 1,
+    zIndex: 100,
   },
   lawList: {},
   lawUrl: {

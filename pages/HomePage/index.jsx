@@ -37,7 +37,7 @@ const HomePage = () => {
   const [selectedIndex1, setSelectedIndex1] = useState(0);
   const [selectedIndex2, setSelectedIndex2] = useState(0);
 
-  const renderSelectItem = title => <SelectItem title={title} />;
+  const renderSelectItem = title => <SelectItem key={title} title={title} />;
 
   const renderRecentTabContent = () => {
     switch (selectedIndex) {
@@ -172,13 +172,24 @@ const HomePage = () => {
             style={styles.teamImage}
             source={require('../../assets/img/federal_law_minister.jpg')}
           />
-          <Text style={styles.teamTitle}>Mr. Azam Nazeer Tarar</Text>
+          <Text style={styles.teamTitle}>MR. AHMED IRFAN ASLAM</Text>
           <Text style={styles.teamDesignation}>
             Federal Minister for Law and Justice
           </Text>
         </Card>
         <Card style={styles.imgCard}>
           <Image
+            style={styles.teamImage}
+            source={require('../../assets/img/secretary_law.png')}
+          />
+          <Text style={styles.teamTitle}>Mr. Raja Naeem Akbar</Text>
+          <Text style={styles.teamDesignation}>
+            Secretary for Law and Justice
+          </Text>
+        </Card>
+        {/*
+        <Card style={styles.imgCard}>
+         {/*<Image
             style={styles.teamImage}
             source={require('../../assets/img/state_minister.png')}
           />
@@ -197,16 +208,7 @@ const HomePage = () => {
             Parliamentary Secretary for Law and Justice
           </Text>
         </Card>
-        <Card style={styles.imgCard}>
-          <Image
-            style={styles.teamImage}
-            source={require('../../assets/img/secretary_law.png')}
-          />
-          <Text style={styles.teamTitle}>Mr. Raja Naeem Akbar</Text>
-          <Text style={styles.teamDesignation}>
-            Secretary for Law and Justice
-          </Text>
-        </Card>
+         */}
       </Layout>
     </ScrollView>
   );

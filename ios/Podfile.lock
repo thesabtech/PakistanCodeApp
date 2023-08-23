@@ -487,6 +487,8 @@ PODS:
     - React-jsi (= 0.72.3)
     - React-logger (= 0.72.3)
     - React-perflogger (= 0.72.3)
+  - rn-fetch-blob (0.12.0):
+    - React-Core
   - RNGestureHandler (2.12.1):
     - React-Core
   - RNPDF (0.14.0):
@@ -565,6 +567,7 @@ DEPENDENCIES:
   - React-runtimescheduler (from `../node_modules/react-native/ReactCommon/react/renderer/runtimescheduler`)
   - React-utils (from `../node_modules/react-native/ReactCommon/react/utils`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
+  - rn-fetch-blob (from `../node_modules/rn-fetch-blob`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNPDF (from `../node_modules/react-native-view-pdf`)
   - RNScreens (from `../node_modules/react-native-screens`)
@@ -668,6 +671,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/react/utils"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
+  rn-fetch-blob:
+    :path: "../node_modules/rn-fetch-blob"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
   RNPDF:
@@ -731,6 +736,7 @@ SPEC CHECKSUMS:
   React-runtimescheduler: 837c1bebd2f84572db17698cd702ceaf585b0d9a
   React-utils: bcb57da67eec2711f8b353f6e3d33bd8e4b2efa3
   ReactCommon: 3ccb8fb14e6b3277e38c73b0ff5e4a1b8db017a9
+  rn-fetch-blob: f065bb7ab7fb48dd002629f8bdcb0336602d3cba
   RNGestureHandler: c0d04458598fcb26052494ae23dda8f8f5162b13
   RNPDF: 8526c7210ff375c29d2461c51945e2f5480f7b60
   RNScreens: 6a8a3c6b808aa48dca1780df7b73ea524f602c63

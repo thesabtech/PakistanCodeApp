@@ -27,9 +27,18 @@ const CategoryStack = createStackNavigator();
 const HomeStackScreen = () => (
   <HomeStack.Navigator>
     <HomeStack.Screen
-      name="Home"
+      name="Back"
       component={HomePage}
-      options={{headerShown: false}}
+      options={{
+        headerTitle: props => (
+          <Image
+            source={{
+              uri: 'https://pakistancode.gov.pk/english/images/pakcodelogo.png',
+            }}
+            style={{width: 30, height: 30}}
+          />
+        ),
+      }}
     />
     <HomeStack.Screen
       name="SingleLaw"
@@ -40,7 +49,7 @@ const HomeStackScreen = () => (
             source={{
               uri: 'https://pakistancode.gov.pk/english/images/pakcodelogo.png',
             }}
-            style={{width: 40, height: 40}}
+            style={{width: 30, height: 30, paddingVertical: 10}}
           />
         ),
       }}
@@ -59,7 +68,7 @@ const AlphaStackScreen = () => (
             source={{
               uri: 'https://pakistancode.gov.pk/english/images/pakcodelogo.png',
             }}
-            style={{width: 40, height: 40}}
+            style={{width: 30, height: 30, paddingVertical: 10}}
           />
         ),
       }}
@@ -73,7 +82,7 @@ const AlphaStackScreen = () => (
             source={{
               uri: 'https://pakistancode.gov.pk/english/images/pakcodelogo.png',
             }}
-            style={{width: 40, height: 40}}
+            style={{width: 30, height: 30, paddingVertical: 10}}
           />
         ),
       }}
@@ -92,7 +101,7 @@ const ChronoStackScreen = () => (
             source={{
               uri: 'https://pakistancode.gov.pk/english/images/pakcodelogo.png',
             }}
-            style={{width: 40, height: 40}}
+            style={{width: 30, height: 30, paddingVertical: 10}}
           />
         ),
       }}
@@ -106,7 +115,7 @@ const ChronoStackScreen = () => (
             source={{
               uri: 'https://pakistancode.gov.pk/english/images/pakcodelogo.png',
             }}
-            style={{width: 40, height: 40}}
+            style={{width: 30, height: 30, paddingVertical: 10}}
           />
         ),
       }}
@@ -125,7 +134,7 @@ const CategoryStackScreen = () => (
             source={{
               uri: 'https://pakistancode.gov.pk/english/images/pakcodelogo.png',
             }}
-            style={{width: 40, height: 40}}
+            style={{width: 30, height: 30, paddingVertical: 10}}
           />
         ),
       }}
@@ -139,7 +148,7 @@ const CategoryStackScreen = () => (
             source={{
               uri: 'https://pakistancode.gov.pk/english/images/pakcodelogo.png',
             }}
-            style={{width: 40, height: 40}}
+            style={{width: 30, height: 30, paddingVertical: 10}}
           />
         ),
       }}
@@ -154,7 +163,11 @@ export const BottomTabBar = ({navigation, state}) => (
     selectedIndex={state.index}
     onSelect={index => navigation.navigate(state.routeNames[index])}
     style={styles.bottomNavigation}>
-    <BottomNavigationTab icon={HomeIcon} title="HOME" />
+    <BottomNavigationTab
+      icon={HomeIcon}
+      title="HOME"
+      options={{headerShown: false}}
+    />
     <BottomNavigationTab icon={AlphaIcon} title="ALPHA" />
     <BottomNavigationTab icon={ChronoIcon} title="CHRONO" />
     <BottomNavigationTab icon={CategoryIcon} title="CATEGORY" />
@@ -163,13 +176,26 @@ export const BottomTabBar = ({navigation, state}) => (
 
 export const BottomNavigationAccessoriesShowcase = () => (
   <BottomTab.Navigator tabBar={props => <BottomTabBar {...props} />}>
-    <BottomTab.Screen name="Home" component={HomeStackScreen} />
-    <BottomTab.Screen name="Alphabetical Order" component={AlphaStackScreen} />
     <BottomTab.Screen
-      name="Chronological Order"
-      component={ChronoStackScreen}
+      name="Home"
+      component={HomeStackScreen}
+      options={{headerShown: false}}
     />
-    <BottomTab.Screen name="Category Wise" component={CategoryStackScreen} />
+    <BottomTab.Screen
+      name="Laws in Alphabetical Order"
+      component={AlphaStackScreen}
+      options={{headerShown: false}}
+    />
+    <BottomTab.Screen
+      name="Laws in Chronological Order"
+      component={ChronoStackScreen}
+      options={{headerShown: false}}
+    />
+    <BottomTab.Screen
+      name="Category Wise Laws"
+      component={CategoryStackScreen}
+      options={{headerShown: false}}
+    />
   </BottomTab.Navigator>
 );
 
