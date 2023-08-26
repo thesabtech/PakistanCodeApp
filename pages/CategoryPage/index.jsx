@@ -91,9 +91,6 @@ const CategoryPage = () => {
     <ScrollView style={styles.container} nestedScrollEnabled={true}>
       <Text style={styles.pageTitle}>Categorywise Laws</Text>
       {loading ? (
-        // <View style={{flex: 1}}>
-        //   <Spinner />
-        // </View>
         <View
           style={{
             flex: 1,
@@ -116,10 +113,6 @@ const CategoryPage = () => {
           </Select>
           {/* Law Mapping */}
           {loadingLaw ? (
-            // <View style={styles.lawLoader}>
-            //   <Spinner />
-            // </View>
-
             <View
               style={{
                 flex: 1,
@@ -127,7 +120,7 @@ const CategoryPage = () => {
                 justifyContent: 'center',
                 alignItems: 'center',
               }}>
-              <Spinner />
+              <Spinner style={{zIndex: 10}} />
             </View>
           ) : (
             <View>
