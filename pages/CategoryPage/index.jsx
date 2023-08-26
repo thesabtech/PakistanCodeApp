@@ -32,40 +32,53 @@ const CategoryPage = () => {
 
   const [categoryLaws, setCategoryLaws] = useState([]);
 
-  const handleSelect = index => {
-    setSelectedOption(index);
-    const selectedCatid = categories[index.row]?.catid;
+  useEffect(() => {
+    let result = laws;
 
-    // Check if both selectedCatid and categoryDetails array are populated
+    // Handle category filtering, using logic similar to handleSelect
+    const selectedCatid = category; // Category coming from route.params
+
     if (selectedCatid !== undefined && categoryDetails.length > 0) {
       const filteredArray = categoryDetails.filter(
-        detail => detail.category == selectedCatid,
+        detail => detail.category === selectedCatid,
       );
 
       if (filteredArray.length !== 0) {
-        // setFilteredCategory(filteredArray);
-        filteredCategory.push(filteredArray);
-      }
+        // Create an array to store laws that match filteredArray
+        const matchedLaws = [];
 
-      // Create an array to store laws that match filteredCategory
-      const matchedLaws = [];
-
-      // Loop through the filteredCategory and laws array to find matches
-      for (let i = 0; i < filteredArray.length; i++) {
-        for (let j = 0; j < laws.length; j++) {
-          if (filteredArray[i].ACTID == laws[j].ACTID_help) {
-            matchedLaws.push(laws[j]);
+        // Loop through the filteredArray and laws array to find matches
+        for (let i = 0; i < filteredArray.length; i++) {
+          for (let j = 0; j < laws.length; j++) {
+            if (filteredArray[i].ACTID === laws[j].ACTID_help) {
+              matchedLaws.push(laws[j]);
+            }
           }
         }
+        result = matchedLaws;
+      } else {
+        console.log('No matching categories found.');
+        result = [];
       }
-
-      setCategoryLaws(matchedLaws);
     } else {
       console.log('Either selectedCatid or categoryDetails is not populated.');
-      filteredCategory.push([]);
-      setCategoryLaws([]);
+      result = [];
     }
-  };
+
+    // Handle year filtering
+    if (year) {
+      result = result.filter(law => law.Year_help === year.toString());
+    }
+
+    // Handle searchTerm filtering
+    if (searchTerm) {
+      result = result.filter(law =>
+        law.title_act_help.toLowerCase().includes(searchTerm.toLowerCase()),
+      );
+    }
+
+    setFilteredLaws(result);
+  }, [laws, categoryDetails, searchTerm, year]);
 
   const renderSelectItem = title => <SelectItem key={title} title={title} />;
 
@@ -124,14 +137,19 @@ const CategoryPage = () => {
             </View>
           ) : (
             <View>
-              {categoryLaws?.map(law => (
-                <TouchableOpacity
-                  onPress={() => handlePress(law)}
-                  style={styles.lawButton}
-                  key={law.ACTID_help}>
-                  <Text style={styles.lawButtonText}>{law.title_act_help}</Text>
-                </TouchableOpacity>
-              ))}
+              {categoryLaws?.map(
+                law =>
+                  law.title_act_help && (
+                    <TouchableOpacity
+                      onPress={() => handlePress(law)}
+                      style={styles.lawButton}
+                      key={law.ACTID_help}>
+                      <Text style={styles.lawButtonText}>
+                        {law.title_act_help}
+                      </Text>
+                    </TouchableOpacity>
+                  ),
+              )}
             </View>
           )}
         </View>

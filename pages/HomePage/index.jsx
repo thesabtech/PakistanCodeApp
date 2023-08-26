@@ -19,6 +19,7 @@ import LatestLaws from '../../components/LatestLaws';
 import MostViewedLaws from '../../components/MostViewedLaws';
 import MissionStatement from '../../components/MissionStatement';
 import AboutUs from '../../components/AboutUs';
+import {useNavigation} from '@react-navigation/native';
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -72,6 +73,20 @@ const HomePage = () => {
     }
   };
 
+  //Search functionality
+  const navigation = useNavigation();
+
+  const performSearch = () => {
+    const searchData = {
+      searchTerm,
+      category: categories[selectedOption1.row]?.catid,
+      year: selectOptions2[selectedOption2.row],
+    };
+    navigation.navigate('SearchResults', {
+      searchData: searchData,
+    });
+  };
+
   return (
     <ScrollView style={{flex: 1}} nestedScrollEnabled={true}>
       <Layout style={styles.container} level="1">
@@ -108,7 +123,10 @@ const HomePage = () => {
               </Select>
             </View>
           </View>
-          <Button title="Search" style={styles.searchBtn}>
+          <Button
+            title="Search"
+            style={styles.searchBtn}
+            onPress={performSearch}>
             Search
           </Button>
         </View>

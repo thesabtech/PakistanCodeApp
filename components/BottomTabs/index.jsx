@@ -10,9 +10,9 @@ import AlphabeticalOrder from '../../pages/AlphabeticalOrderPage';
 import ChronoLogicalOrder from '../../pages/ChronologicalOrderPage';
 import CategoryPage from '../../pages/CategoryPage';
 import SingleLaw from '../SingleLaw';
-
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import SearchResults from '../SearchResults';
 
 const HomeIcon = props => <Icon {...props} name="home-outline" />;
 const AlphaIcon = props => <Icon {...props} name="archive-outline" />;
@@ -43,6 +43,20 @@ const HomeStackScreen = () => (
     <HomeStack.Screen
       name="SingleLaw"
       component={SingleLaw}
+      options={{
+        headerTitle: props => (
+          <Image
+            source={{
+              uri: 'https://pakistancode.gov.pk/english/images/pakcodelogo.png',
+            }}
+            style={{width: 30, height: 30, paddingVertical: 10}}
+          />
+        ),
+      }}
+    />
+    <HomeStack.Screen
+      name="SearchResults"
+      component={SearchResults}
       options={{
         headerTitle: props => (
           <Image
@@ -163,11 +177,7 @@ export const BottomTabBar = ({navigation, state}) => (
     selectedIndex={state.index}
     onSelect={index => navigation.navigate(state.routeNames[index])}
     style={styles.bottomNavigation}>
-    <BottomNavigationTab
-      icon={HomeIcon}
-      title="HOME"
-      options={{headerShown: false}}
-    />
+    <BottomNavigationTab icon={HomeIcon} title="HOME" />
     <BottomNavigationTab icon={AlphaIcon} title="ALPHA" />
     <BottomNavigationTab icon={ChronoIcon} title="CHRONO" />
     <BottomNavigationTab icon={CategoryIcon} title="CATEGORY" />

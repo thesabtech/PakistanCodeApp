@@ -36,7 +36,8 @@ const ChronoLogicalOrder = () => {
     setSelectedYear(years[index.row]);
     setSelectedIndex(index);
     const filteredLaws = laws.filter(
-      law => law.Year_help === years[index.row].toString(),
+      law =>
+        law.title_act_help && law.Year_help === years[index.row].toString(),
     );
     setFilteredLaws(filteredLaws);
   };
