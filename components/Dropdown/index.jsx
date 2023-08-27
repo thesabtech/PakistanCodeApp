@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import {View, StyleSheet, TouchableOpacity, Text} from 'react-native';
-import {Popover, Button} from '@ui-kitten/components';
+import {Popover, Icon} from '@ui-kitten/components';
+
+const MoreIcon = props => <Icon {...props} name="more-horizontal-outline" />;
 
 const Dropdown = ({navigation}) => {
   const [visible, setVisible] = useState(false);
@@ -15,10 +17,12 @@ const Dropdown = ({navigation}) => {
       anchor={() => (
         <TouchableOpacity onPress={togglePopover}>
           <Text>...</Text>
+          {/* <MoreIcon /> */}
         </TouchableOpacity>
       )}
+      style={{marginTop: 16, paddingRight: 0, backgroundColor: '#efefef'}}
       onBackdropPress={togglePopover}
-      placement="bottom start">
+      placement="bottom end">
       <View style={styles.container}>
         <TouchableOpacity onPress={() => navigation.navigate('PrivacyPolicy')}>
           <Text>Privacy Policy</Text>
@@ -31,7 +35,7 @@ const Dropdown = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     padding: 16,
-    width: 200,
+    width: 'auto',
   },
 });
 

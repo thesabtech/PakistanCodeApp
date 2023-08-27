@@ -26,35 +26,36 @@ const AlphaStack = createStackNavigator();
 const ChronoStack = createStackNavigator();
 const CategoryStack = createStackNavigator();
 
+const CommonHeader = ({navigation}) => (
+  <View
+    style={{
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      width: '100%',
+    }}>
+    <View style={{flex: 0.4, alignItems: 'flex-start'}}>
+      <Text style={{textAlign: 'left'}}>Pakistan Code</Text>
+    </View>
+    <View style={{flex: 0.2, alignItems: 'center'}}>
+      <Image
+        source={require('../../assets/img/pakcodelogo.png')}
+        style={{width: 30, height: 30}}
+      />
+    </View>
+    <View style={{flex: 0.4, alignItems: 'flex-end'}}>
+      <Dropdown navigation={navigation} />
+    </View>
+  </View>
+);
+
 const HomeStackScreen = ({navigation}) => (
   <HomeStack.Navigator>
     <HomeStack.Screen
       name="Back"
       component={HomePage}
       options={{
-        headerTitle: props => (
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-between', // Distribute items along the line
-              flex: 1, // Make sure it takes up the full space available
-            }}>
-            <Text style={{flex: 1, textAlign: 'left'}}>Pakistan Code</Text>
-            <View style={{flex: 1, alignItems: 'center'}}>
-              <Image
-                source={{
-                  uri: 'https://pakistancode.gov.pk/english/images/pakcodelogo.png',
-                }}
-                style={{width: 30, height: 30}}
-              />
-            </View>
-
-            <View style={{flex: 1, textAlign: 'flex-end'}}>
-              <Dropdown navigation={navigation} />
-            </View>
-          </View>
-        ),
+        headerTitle: () => <CommonHeader navigation={navigation} />,
       }}
     />
     <HomeStack.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
@@ -62,127 +63,71 @@ const HomeStackScreen = ({navigation}) => (
       name="SingleLaw"
       component={SingleLaw}
       options={{
-        headerTitle: props => (
-          <Image
-            source={{
-              uri: 'https://pakistancode.gov.pk/english/images/pakcodelogo.png',
-            }}
-            style={{width: 30, height: 30, paddingVertical: 10}}
-          />
-        ),
+        headerTitle: () => <CommonHeader navigation={navigation} />,
       }}
     />
     <HomeStack.Screen
       name="SearchResults"
       component={SearchResults}
       options={{
-        headerTitle: props => (
-          <Image
-            source={{
-              uri: 'https://pakistancode.gov.pk/english/images/pakcodelogo.png',
-            }}
-            style={{width: 30, height: 30, paddingVertical: 10}}
-          />
-        ),
+        headerTitle: () => <CommonHeader navigation={navigation} />,
       }}
     />
   </HomeStack.Navigator>
 );
 
-const AlphaStackScreen = () => (
+const AlphaStackScreen = ({navigation}) => (
   <AlphaStack.Navigator>
     <AlphaStack.Screen
       name="Alphabetical Order"
       component={AlphabeticalOrder}
       options={{
-        headerTitle: props => (
-          <Image
-            source={{
-              uri: 'https://pakistancode.gov.pk/english/images/pakcodelogo.png',
-            }}
-            style={{width: 30, height: 30, paddingVertical: 10}}
-          />
-        ),
+        headerTitle: () => <CommonHeader navigation={navigation} />,
       }}
     />
     <AlphaStack.Screen
       name="SingleLawAlpha"
       component={SingleLaw}
       options={{
-        headerTitle: props => (
-          <Image
-            source={{
-              uri: 'https://pakistancode.gov.pk/english/images/pakcodelogo.png',
-            }}
-            style={{width: 30, height: 30, paddingVertical: 10}}
-          />
-        ),
+        headerTitle: () => <CommonHeader navigation={navigation} />,
       }}
     />
   </AlphaStack.Navigator>
 );
 
-const ChronoStackScreen = () => (
+const ChronoStackScreen = ({navigation}) => (
   <ChronoStack.Navigator>
     <ChronoStack.Screen
       name="ChronoPage"
       component={ChronoLogicalOrder}
       options={{
-        headerTitle: props => (
-          <Image
-            source={{
-              uri: 'https://pakistancode.gov.pk/english/images/pakcodelogo.png',
-            }}
-            style={{width: 30, height: 30, paddingVertical: 10}}
-          />
-        ),
+        headerTitle: () => <CommonHeader navigation={navigation} />,
       }}
     />
     <ChronoStack.Screen
       name="SingleLawChrono"
       component={SingleLaw}
       options={{
-        headerTitle: props => (
-          <Image
-            source={{
-              uri: 'https://pakistancode.gov.pk/english/images/pakcodelogo.png',
-            }}
-            style={{width: 30, height: 30, paddingVertical: 10}}
-          />
-        ),
+        headerTitle: () => <CommonHeader navigation={navigation} />,
       }}
     />
   </ChronoStack.Navigator>
 );
 
-const CategoryStackScreen = () => (
+const CategoryStackScreen = ({navigation}) => (
   <CategoryStack.Navigator>
     <CategoryStack.Screen
       name="CategoryPage"
       component={CategoryPage}
       options={{
-        headerTitle: props => (
-          <Image
-            source={{
-              uri: 'https://pakistancode.gov.pk/english/images/pakcodelogo.png',
-            }}
-            style={{width: 30, height: 30, paddingVertical: 10}}
-          />
-        ),
+        headerTitle: () => <CommonHeader navigation={navigation} />,
       }}
     />
     <CategoryStack.Screen
       name="SingleLawCategory"
       component={SingleLaw}
       options={{
-        headerTitle: props => (
-          <Image
-            source={{
-              uri: 'https://pakistancode.gov.pk/english/images/pakcodelogo.png',
-            }}
-            style={{width: 30, height: 30, paddingVertical: 10}}
-          />
-        ),
+        headerTitle: () => <CommonHeader navigation={navigation} />,
       }}
     />
   </CategoryStack.Navigator>
