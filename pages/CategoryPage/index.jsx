@@ -19,7 +19,7 @@ const CategoryPage = () => {
   const categoryDetails = useSelector(
     state => state.categoryDetails.categoryDetails,
   );
-  const loading = useSelector(state => state.loading);
+  const loading = useSelector(state => state.categories.loading);
 
   // const [filteredCategory, setFilteredCategory] = useState([]);
   const filteredCategory = [];
@@ -82,7 +82,7 @@ const CategoryPage = () => {
   };
 
   const laws = useSelector(state => state.laws.laws);
-  const loadingLaw = useSelector(state => state.loading);
+  const loadingLaw = useSelector(state => state.laws.loading);
 
   useEffect(() => {
     dispatch(fetchLaws());
@@ -95,11 +95,10 @@ const CategoryPage = () => {
         <View
           style={{
             flex: 1,
-            backgroundColor: 'lightgrey',
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          <Spinner />
+          <Spinner status="success" />
         </View>
       ) : (
         <View style={styles.container}>
@@ -122,11 +121,10 @@ const CategoryPage = () => {
             <View
               style={{
                 flex: 1,
-                backgroundColor: 'lightgrey',
                 justifyContent: 'center',
                 alignItems: 'center',
               }}>
-              <Spinner style={{zIndex: 10}} />
+              <Spinner status="success" style={{zIndex: 10}} />
             </View>
           ) : (
             <View>

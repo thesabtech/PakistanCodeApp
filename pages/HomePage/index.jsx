@@ -94,6 +94,12 @@ const HomePage = () => {
     });
   };
 
+  const handleClear = () => {
+    setSearchTerm('');
+    setSelectedOption1('');
+    setSelectedOption2('');
+  };
+
   return (
     <ScrollView style={{flex: 1}} nestedScrollEnabled={true}>
       <Layout style={styles.container} level="1">
@@ -153,6 +159,7 @@ const HomePage = () => {
             Search
           </Button>
           <TouchableOpacity
+            onPress={handleClear}
             style={{paddingVertical: 5, paddingHorizontal: 5, marginTop: 15}}>
             <Text style={{color: '#f7f7f7', textAlign: 'right'}}>
               Clear Search

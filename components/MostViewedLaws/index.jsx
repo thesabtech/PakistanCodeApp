@@ -1,6 +1,6 @@
-import {Text} from '@ui-kitten/components';
+import {Spinner, Text} from '@ui-kitten/components';
 import React, {useEffect} from 'react';
-import {TouchableOpacity, View} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {fetchLaws} from '../../store/actions/lawsActions';
 import moment from 'moment';
@@ -8,7 +8,7 @@ import moment from 'moment';
 const MostViewedLaws = () => {
   const dispatch = useDispatch();
   const laws = useSelector(state => state.laws.laws);
-  const loading = useSelector(state => state.loading);
+  const loading = useSelector(state => state.laws.loading);
 
   useEffect(() => {
     dispatch(fetchLaws());
@@ -28,24 +28,49 @@ const MostViewedLaws = () => {
   return (
     <View>
       {loading ? (
-        <View style={{flex: 1}}>
-          <Spinner />
-        </View>
-      ) : filteredLaws.length !== '0' || filteredLaws !== '' ? (
-        <View>
-          {filteredLaws?.map(law => (
-            <TouchableOpacity title={law.title_act_help} key={law.ACTID_help}>
-              <Text>{law.title_act_help}</Text>
-            </TouchableOpacity>
-          ))}
+        <View style={styles.lawLoader}>
+          <Spinner style={styles.loader} status="success" />
         </View>
       ) : (
-        <View>
-          <Text>No Laws</Text>
+        <View style={styles.lawList}>
+          {filteredLaws?.map(law => (
+            <TouchableOpacity
+              onPress={() => handlePress(law)}
+              style={styles.lawUrl}
+              title={law.title_act_help}
+              key={law.ACTID_help}>
+              <Text style={styles.lawUrlText}>{'- ' + law.title_act_help}</Text>
+            </TouchableOpacity>
+          ))}
         </View>
       )}
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  lawLoader: {
+    flex: 1,
+    zIndex: 100,
+    textAlign: 'center',
+    alignItems: 'center',
+    paddingVertical: 30,
+  },
+  lawList: {
+    paddingVertical: 20,
+  },
+  loader: {color: '#43a047', paddingVertical: 30},
+  lawUrl: {
+    borderBottom: 2,
+    borderBottomColor: '#43a047',
+  },
+  lawUrlText: {
+    textAlign: 'left',
+    paddingVertical: 6,
+    fontSize: 16,
+    fontWeight: 600,
+    color: '#43a047',
+  },
+});
 
 export default MostViewedLaws;

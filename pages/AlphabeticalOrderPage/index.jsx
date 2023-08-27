@@ -14,7 +14,7 @@ import {useNavigation} from '@react-navigation/native';
 const AlphabeticalOrder = () => {
   const dispatch = useDispatch();
   const laws = useSelector(state => state.laws.laws);
-  const loading = useSelector(state => state.loading);
+  const loading = useSelector(state => state.laws.loading);
 
   const alphabets = Array.from('ABCDEFGHIJKLMNOPQRSTUVWXYZ');
 
@@ -54,22 +54,19 @@ const AlphabeticalOrder = () => {
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.pageTitle}>Alphabetical Order Laws</Text>
-      {loading ? (
-        <View style={styles.loader}>
-          <Spinner />
-        </View>
-      ) : (
-        <View style={styles.container}>
-          <Text style={styles.label}>Select Alphabet</Text>
-          <Select
-            style={styles.select}
-            value={selectedAlphabet}
-            onSelect={handleSelectAlphabet}>
-            {alphabets.map(alphabet => (
-              <SelectItem key={alphabet} title={alphabet} />
-            ))}
-          </Select>
-          {filteredLaws.length !== 0 ? (
+
+      <View style={styles.container}>
+        <Text style={styles.label}>Select Alphabet</Text>
+        <Select
+          style={styles.select}
+          value={selectedAlphabet}
+          onSelect={handleSelectAlphabet}>
+          {alphabets.map(alphabet => (
+            <SelectItem key={alphabet} title={alphabet} />
+          ))}
+        </Select>
+        {!loading ? (
+          filteredLaws.length !== 0 ? (
             filteredLaws.map(law => (
               <TouchableOpacity
                 onPress={() => handlePress(law)}
@@ -82,9 +79,13 @@ const AlphabeticalOrder = () => {
             <Text style={styles.noLawsText}>
               No Laws starting with {selectedAlphabet}
             </Text>
-          )}
-        </View>
-      )}
+          )
+        ) : (
+          <View style={styles.loader}>
+            <Spinner status="success" />
+          </View>
+        )}
+      </View>
     </ScrollView>
   );
 };
@@ -111,7 +112,6 @@ const styles = StyleSheet.create({
   },
   loader: {
     flex: 1,
-    backgroundColor: 'lightgrey',
     justifyContent: 'center',
     alignItems: 'center',
   },

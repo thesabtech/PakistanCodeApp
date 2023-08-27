@@ -14,7 +14,13 @@ import {useNavigation} from '@react-navigation/native';
 
 const SearchResults = ({route}) => {
   const dispatch = useDispatch();
-  const {searchTerm, category, year} = route?.params?.searchData ?? {};
+  //   const {searchTerm, category, year} = route?.params?.searchData ?? {};
+  const {
+    searchTerm = '',
+    category = '',
+    year = '',
+  } = route?.params?.searchData ?? {};
+
   const [filteredLaws, setFilteredLaws] = useState([]);
 
   // Data calls
@@ -31,31 +37,46 @@ const SearchResults = ({route}) => {
   }, [dispatch]);
 
   useEffect(() => {
-    let result = laws;
+    // Start with all laws
+    let filteredLawsList = [...laws];
 
-    // Handle category filtering
-    const selectedCatid = categories.find(cat => cat.title === category)?.catid;
-    if (selectedCatid) {
-      const categoryDetailIds = categoryDetails
-        .filter(detail => detail.category === selectedCatid)
-        .map(detail => detail.ACTID);
-      result = result.filter(law => categoryDetailIds.includes(law.ACTID_help));
+    // Filter by category
+    if (category) {
+      const selectedCatid = categories.find(
+        cat => cat.catid == category,
+      )?.catid;
+      if (selectedCatid) {
+        const categoryDetailIds = categoryDetails
+          .filter(detail => detail.category == selectedCatid)
+          .map(detail => detail.ACTID);
+        filteredLawsList = filteredLawsList.filter(law =>
+          categoryDetailIds.some(id => String(id) === String(law.ACTID_help)),
+        );
+      }
     }
 
-    // Handle year filtering
+    // Filter by year
     if (year) {
-      result = result.filter(law => law.Year_help === year.toString());
-    }
-
-    // Handle searchTerm filtering
-    if (searchTerm) {
-      result = result.filter(law =>
-        law.title_act_help.toLowerCase().includes(searchTerm.toLowerCase()),
+      filteredLawsList = filteredLawsList.filter(
+        law => law.Year_help === year.toString(),
       );
     }
 
-    setFilteredLaws(result);
+    // Filter by search term
+    if (searchTerm) {
+      filteredLawsList = filteredLawsList.filter(law =>
+        law.title_act_help
+          ? law.title_act_help.toLowerCase().includes(searchTerm.toLowerCase())
+          : false,
+      );
+    }
+
+    setFilteredLaws(filteredLawsList);
   }, [laws, categoryDetails, categories, searchTerm, year]);
+
+  console.log('Search Term: ', searchTerm);
+  console.log('Category: ', category);
+  console.log('Year: ', year);
 
   const navigation = useNavigation();
 
@@ -71,11 +92,6 @@ const SearchResults = ({route}) => {
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.pageTitle}>Search Results</Text>
-      <View style={styles.searchData}>
-        <Text style={{textAlign: 'center'}}>
-          Searching Laws for {searchTerm} : {category} : {year}
-        </Text>
-      </View>
       <View>
         {filteredLaws.length !== 0 ? (
           filteredLaws.map(

@@ -14,7 +14,6 @@ import moment from 'moment';
 
 const ChronoLogicalOrder = () => {
   const dispatch = useDispatch();
-  const loading = useSelector(state => state.loading);
 
   const years = Array.from(
     {length: moment().year() - 1839 + 1},
@@ -52,12 +51,15 @@ const ChronoLogicalOrder = () => {
 
   const navigation = useNavigation();
   const laws = useSelector(state => state.laws.laws);
+  const loading = useSelector(state => state.laws.loading);
 
   return (
     <ScrollView style={styles.container} nestedScrollEnabled={true}>
       <Text style={styles.pageTitle}>Chronological Order Laws</Text>
       {loading ? (
-        <Spinner />
+        <View style={styles.loader}>
+          <Spinner status="success" />
+        </View>
       ) : (
         <View style={styles.container}>
           <Text style={styles.label}>Select Year</Text>
@@ -122,6 +124,11 @@ const styles = StyleSheet.create({
     borderColor: '#43a047',
     borderRadius: 4,
     marginVertical: 8,
+  },
+  loader: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   lawButtonText: {
     color: '#43a047',

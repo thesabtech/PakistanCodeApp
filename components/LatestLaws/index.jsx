@@ -3,11 +3,12 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {fetchLaws} from '../../store/actions/lawsActions';
 import {useNavigation} from '@react-navigation/native';
+import {Spinner} from '@ui-kitten/components';
 
 const LatestLaws = () => {
   const dispatch = useDispatch();
   const laws = useSelector(state => state.laws.laws);
-  const loading = useSelector(state => state.loading);
+  const loading = useSelector(state => state.laws.loading);
 
   const navigation = useNavigation();
 
@@ -38,7 +39,7 @@ const LatestLaws = () => {
     <View>
       {loading ? (
         <View style={styles.lawLoader}>
-          <Spinner />
+          <Spinner style={styles.loader} status="success" />
         </View>
       ) : (
         <View style={styles.lawList}>
@@ -48,7 +49,7 @@ const LatestLaws = () => {
               style={styles.lawUrl}
               title={law.title_act_help}
               key={law.ACTID_help}>
-              <Text style={styles.lawUrlText}>{law.title_act_help}</Text>
+              <Text style={styles.lawUrlText}>{'- ' + law.title_act_help}</Text>
             </TouchableOpacity>
           ))}
         </View>
@@ -61,15 +62,22 @@ const styles = StyleSheet.create({
   lawLoader: {
     flex: 1,
     zIndex: 100,
+    textAlign: 'center',
+    alignItems: 'center',
+    paddingVertical: 30,
   },
-  lawList: {},
+  lawList: {
+    paddingVertical: 20,
+  },
+  loader: {color: '#43a047', paddingVertical: 30},
   lawUrl: {
-    border: 2,
+    borderBottom: 2,
+    borderBottomColor: '#43a047',
   },
   lawUrlText: {
     textAlign: 'left',
     paddingVertical: 6,
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: 600,
     color: '#43a047',
   },
