@@ -23,12 +23,13 @@ const CategoryPage = () => {
 
   // const [filteredCategory, setFilteredCategory] = useState([]);
   const filteredCategory = [];
-  const [selectedOption, setSelectedOption] = useState(new IndexPath(0));
+  // const [selectedOption, setSelectedOption] = useState(new IndexPath(0));
+  const [selectedOption, setSelectedOption] = useState(null);
 
   useEffect(() => {
     dispatch(fetchCategories());
     dispatch(fetchCategoryDetails());
-  }, [dispatch]);
+  }, [dispatch, laws, selectedOption]);
 
   const [categoryLaws, setCategoryLaws] = useState([]);
 
@@ -106,8 +107,13 @@ const CategoryPage = () => {
           <Select
             style={styles.select}
             selectedIndex={selectedOption}
-            onSelect={handleSelect}
-            value={categories[selectedOption.row]?.CATEGOR}
+            onSelect={index => handleSelect(index)}
+            // Change this line to make it conditional
+            value={
+              selectedOption
+                ? categories[selectedOption.row]?.CATEGOR
+                : undefined
+            }
             placeholder="Select Option">
             {categories.map(cat => renderSelectItem(cat.CATEGOR))}
           </Select>
@@ -124,7 +130,12 @@ const CategoryPage = () => {
             </View>
           ) : (
             <View>
-              {categoryLaws &&
+              {categoryLaws.length === 0 ? (
+                <Text style={styles.infoText}>
+                  Select a category to get the laws.
+                </Text>
+              ) : (
+                categoryLaws &&
                 categoryLaws?.map(law => (
                   <TouchableOpacity
                     onPress={() => handlePress(law)}
@@ -134,7 +145,8 @@ const CategoryPage = () => {
                       {law.title_act_help}
                     </Text>
                   </TouchableOpacity>
-                ))}
+                ))
+              )}
             </View>
           )}
         </View>
@@ -182,6 +194,13 @@ const styles = StyleSheet.create({
     color: '#43a047',
     textAlign: 'center',
     fontWeight: 600,
+  },
+  infoText: {
+    padding: 10,
+    textAlign: 'center',
+    fontSize: 16,
+    fontWeight: 600,
+    color: '#0d0d0d',
   },
 });
 

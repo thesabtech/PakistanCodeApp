@@ -20,7 +20,7 @@ const Dropdown = ({navigation}) => {
           {/* <MoreIcon /> */}
         </TouchableOpacity>
       )}
-      style={{marginTop: 16, paddingRight: 0, backgroundColor: '#efefef'}}
+      style={{marginTop: 16, paddingRight: 0, backgroundColor: '#f7f7f7'}}
       onBackdropPress={togglePopover}
       placement="bottom end">
       <View style={styles.container}>

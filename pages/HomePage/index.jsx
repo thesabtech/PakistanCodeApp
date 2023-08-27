@@ -1,5 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {Image, ScrollView, StyleSheet, View} from 'react-native';
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {
   Card,
   Input,
@@ -28,12 +34,13 @@ const HomePage = () => {
     dispatch(fetchCategories());
   }, [dispatch]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedOption1, setSelectedOption1] = useState(new IndexPath(0));
+  const [selectedOption1, setSelectedOption1] = useState('');
+  const [selectedOption2, setSelectedOption2] = useState('');
+
   const currentYear = moment().year();
-  const selectOptions2 = Array.from({length: currentYear - 1937}, (_, i) =>
-    (1938 + i).toString(),
+  const selectOptions2 = Array.from({length: currentYear - 1838}, (_, i) =>
+    (1839 + i).toString(),
   );
-  const [selectedOption2, setSelectedOption2] = useState(new IndexPath(0));
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [selectedIndex1, setSelectedIndex1] = useState(0);
   const [selectedIndex2, setSelectedIndex2] = useState(0);
@@ -116,7 +123,11 @@ const HomePage = () => {
                 style={styles.select}
                 selectedIndex={selectedOption1}
                 onSelect={index => setSelectedOption1(index)}
-                value={categories[selectedOption1.row]?.CATEGOR}
+                value={
+                  selectedOption1
+                    ? categories[selectedOption1.row]?.CATEGOR
+                    : ''
+                }
                 placeholder="Select Option">
                 {categories.map(cat => renderSelectItem(cat.CATEGOR))}
               </Select>
@@ -127,7 +138,9 @@ const HomePage = () => {
                 style={styles.select}
                 selectedIndex={selectedOption2}
                 onSelect={index => setSelectedOption2(index)}
-                value={selectOptions2[selectedOption2.row]}
+                value={
+                  selectedOption2 ? selectOptions2[selectedOption2.row] : ''
+                }
                 placeholder="Select Option">
                 {selectOptions2.map(renderSelectItem)}
               </Select>
@@ -139,6 +152,12 @@ const HomePage = () => {
             onPress={performSearch}>
             Search
           </Button>
+          <TouchableOpacity
+            style={{paddingVertical: 5, paddingHorizontal: 5, marginTop: 15}}>
+            <Text style={{color: '#f7f7f7', textAlign: 'right'}}>
+              Clear Search
+            </Text>
+          </TouchableOpacity>
         </View>
         <Card style={styles.card}>
           <TabBar
