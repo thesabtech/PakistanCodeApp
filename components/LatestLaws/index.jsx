@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {Button, StyleSheet, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {fetchLaws} from '../../store/actions/lawsActions';
 import {useNavigation} from '@react-navigation/native';
@@ -43,13 +43,13 @@ const LatestLaws = () => {
       ) : (
         <View style={styles.lawList}>
           {filteredLaws?.map(law => (
-            <Button
+            <TouchableOpacity
               onPress={() => handlePress(law)}
               style={styles.lawUrl}
               title={law.title_act_help}
               key={law.ACTID_help}>
-              {law.title_act_help}
-            </Button>
+              <Text>{law.title_act_help}</Text>
+            </TouchableOpacity>
           ))}
         </View>
       )}

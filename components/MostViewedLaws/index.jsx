@@ -1,6 +1,6 @@
-import {Button, Text} from '@ui-kitten/components';
+import {Text} from '@ui-kitten/components';
 import React, {useEffect} from 'react';
-import {View} from 'react-native';
+import {TouchableOpacity, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {fetchLaws} from '../../store/actions/lawsActions';
 import moment from 'moment';
@@ -34,9 +34,9 @@ const MostViewedLaws = () => {
       ) : filteredLaws.length !== '0' || filteredLaws !== '' ? (
         <View>
           {filteredLaws?.map(law => (
-            <Button title={law.title_act_help} key={law.ACTID_help}>
-              {law.title_act_help}
-            </Button>
+            <TouchableOpacity title={law.title_act_help} key={law.ACTID_help}>
+              <Text>{law.title_act_help}</Text>
+            </TouchableOpacity>
           ))}
         </View>
       ) : (
