@@ -48,7 +48,7 @@ const LatestLaws = () => {
               style={styles.lawUrl}
               title={law.title_act_help}
               key={law.ACTID_help}>
-              <Text>{law.title_act_help}</Text>
+              <Text style={styles.lawUrlText}>{law.title_act_help}</Text>
             </TouchableOpacity>
           ))}
         </View>
@@ -64,8 +64,14 @@ const styles = StyleSheet.create({
   },
   lawList: {},
   lawUrl: {
-    alignSelf: 'flex-start',
+    border: 2,
+  },
+  lawUrlText: {
     textAlign: 'left',
+    paddingVertical: 6,
+    fontSize: 14,
+    fontWeight: 600,
+    color: '#43a047',
   },
 });
 

@@ -90,6 +90,16 @@ const HomePage = () => {
   return (
     <ScrollView style={{flex: 1}} nestedScrollEnabled={true}>
       <Layout style={styles.container} level="1">
+        <Text
+          style={{
+            color: '#333',
+            marginBottom: 16,
+            fontSize: 18,
+            fontWeight: 600,
+            alignSelf: 'center',
+          }}>
+          The Pakistan Code
+        </Text>
         <View style={styles.searchBox}>
           <Text style={styles.heading}>Search Laws</Text>
           <Text style={styles.label}>Search Term</Text>
@@ -131,16 +141,6 @@ const HomePage = () => {
           </Button>
         </View>
         <Card style={styles.card}>
-          <Text
-            style={{
-              color: '#333',
-              marginBottom: 16,
-              fontSize: 18,
-              fontWeight: 600,
-              alignSelf: 'center',
-            }}>
-            The Pakistan Code
-          </Text>
           <TabBar
             selectedIndex={selectedIndex2}
             onSelect={index => setSelectedIndex2(index)}>

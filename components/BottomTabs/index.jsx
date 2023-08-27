@@ -35,7 +35,7 @@ const CommonHeader = ({navigation}) => (
       width: '100%',
     }}>
     <View style={{flex: 0.4, alignItems: 'flex-start'}}>
-      <Text style={{textAlign: 'left'}}>Pakistan Code</Text>
+      <Text style={{textAlign: 'left'}}></Text>
     </View>
     <View style={{flex: 0.2, alignItems: 'center'}}>
       <Image
