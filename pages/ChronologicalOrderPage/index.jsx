@@ -15,6 +15,10 @@ import moment from 'moment';
 const ChronoLogicalOrder = () => {
   const dispatch = useDispatch();
 
+  const navigation = useNavigation();
+  const laws = useSelector(state => state.laws.laws);
+  const loading = useSelector(state => state.laws.loading);
+
   const years = Array.from(
     {length: moment().year() - 1839 + 1},
     (_, i) => 1839 + i,
@@ -27,8 +31,10 @@ const ChronoLogicalOrder = () => {
     setSelectedYear(years[index.row]);
     const filtered = laws.filter(
       law =>
-        law.title_act_help && law.Year_help === years[index.row].toString(),
+        law?.title_act_help &&
+        law?.Year_help?.toString() === years[index.row].toString(),
     );
+    console.log('Selected Index: ', filtered);
     setFilteredLaws(filtered);
   };
 
@@ -41,17 +47,17 @@ const ChronoLogicalOrder = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (laws.length) {
+    if (laws.length > 0) {
       const filtered = laws.filter(
-        law => law.title_act_help && law.Year_help === selectedYear.toString(),
+        law =>
+          law?.title_act_help &&
+          law?.Year_help?.toString() === selectedYear.toString(),
       );
       setFilteredLaws(filtered);
     }
   }, [laws, selectedYear]);
 
-  const navigation = useNavigation();
-  const laws = useSelector(state => state.laws.laws);
-  const loading = useSelector(state => state.laws.loading);
+  console.log('Selected Year: ', selectedYear);
 
   return (
     <ScrollView style={styles.container} nestedScrollEnabled={true}>

@@ -12,18 +12,16 @@ const PrivacyPolicy = () => {
 
       <Text style={styles.heading}>Introduction</Text>
       <Text style={styles.text}>
-        Welcome to [Your Company Name]'s Privacy Policy. We are committed to
-        protecting the privacy and security of our users' data in compliance
-        with the laws of Pakistan.
+        Welcome to Pakistan Code's Privacy Policy. We are committed to
+        protecting the privacy and security of our data in compliance with the
+        laws of Pakistan.
       </Text>
 
       <Text style={styles.heading}>Information Collection and Use</Text>
       <Text style={styles.subHeading}>Personal Identification Information</Text>
       <Text style={styles.text}>
-        We may collect personal identification information such as name, email
-        address, phone number, etc. The information is collected upon your
-        consent and will be used solely for the purpose stated at the time of
-        collection.
+        We may use cookies and similar technologies to enhance your browsing
+        experience, but these do not collect personal information.
       </Text>
 
       <Text style={styles.subHeading}>
@@ -44,7 +42,7 @@ const PrivacyPolicy = () => {
       <Text style={styles.heading}>Contact Us</Text>
       <Text style={styles.text}>
         If you have any questions or suggestions about our Privacy Policy, do
-        not hesitate to contact us at [Contact Information].
+        not hesitate to contact us at contact@molaw.gov.pk
       </Text>
     </ScrollView>
   );

@@ -15,11 +15,11 @@ import {useNavigation} from '@react-navigation/native';
 
 const CategoryPage = () => {
   const dispatch = useDispatch();
-  const categories = useSelector(state => state.categories.categories);
+  const categories = useSelector(state => state?.categories?.categories);
   const categoryDetails = useSelector(
-    state => state.categoryDetails.categoryDetails,
+    state => state?.categoryDetails?.categoryDetails,
   );
-  const loading = useSelector(state => state.categories.loading);
+  const loading = useSelector(state => state?.categories?.loading);
 
   // const [filteredCategory, setFilteredCategory] = useState([]);
   const filteredCategory = [];
@@ -40,7 +40,7 @@ const CategoryPage = () => {
     // Check if both selectedCatid and categoryDetails array are populated
     if (selectedCatid !== undefined && categoryDetails.length > 0) {
       const filteredArray = categoryDetails.filter(
-        detail => detail.category == selectedCatid,
+        detail => detail?.category == selectedCatid,
       );
 
       if (filteredArray.length !== 0) {
@@ -52,9 +52,9 @@ const CategoryPage = () => {
       const matchedLaws = [];
 
       // Loop through the filteredCategory and laws array to find matches
-      for (let i = 0; i < filteredArray.length; i++) {
-        for (let j = 0; j < laws.length; j++) {
-          if (filteredArray[i].ACTID == laws[j].ACTID_help) {
+      for (let i = 0; i < filteredArray?.length; i++) {
+        for (let j = 0; j < laws?.length; j++) {
+          if (filteredArray[i]?.ACTID == laws[j]?.ACTID_help) {
             matchedLaws.push(laws[j]);
           }
         }
@@ -74,15 +74,15 @@ const CategoryPage = () => {
 
   const handlePress = law => {
     const simplifiedLaw = {
-      title_act_help: law.title_act_help,
-      ACTID_help: law.ACTID_help,
-      lawFile: JSON.stringify(law.title_act_help),
+      title_act_help: law?.title_act_help,
+      ACTID_help: law?.ACTID_help,
+      lawFile: JSON.stringify(law?.title_act_help),
     };
     navigation.navigate('SingleLaw', {law: simplifiedLaw});
   };
 
-  const laws = useSelector(state => state.laws.laws);
-  const loadingLaw = useSelector(state => state.laws.loading);
+  const laws = useSelector(state => state?.laws?.laws);
+  const loadingLaw = useSelector(state => state?.laws?.loading);
 
   useEffect(() => {
     dispatch(fetchLaws());
@@ -114,7 +114,7 @@ const CategoryPage = () => {
                 : undefined
             }
             placeholder="Select Option">
-            {categories.map(cat => renderSelectItem(cat.CATEGOR))}
+            {categories.map(cat => renderSelectItem(cat?.CATEGOR))}
           </Select>
           {/* Law Mapping */}
           {loadingLaw ? (
@@ -138,9 +138,9 @@ const CategoryPage = () => {
                   <TouchableOpacity
                     onPress={() => handlePress(law)}
                     style={styles.lawButton}
-                    key={law.ACTID_help}>
+                    key={law?.ACTID_help}>
                     <Text style={styles.lawButtonText}>
-                      {law.title_act_help}
+                      {law?.title_act_help}
                     </Text>
                   </TouchableOpacity>
                 ))

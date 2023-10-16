@@ -211,7 +211,7 @@ const HomePage = () => {
           </TabBar>
           {renderImportantTabContent()}
         </Card>
-        <Card style={styles.imgCard}>
+        {/*<Card style={styles.imgCard}>
           <Image
             style={styles.teamImage}
             source={require('../../assets/img/federal_law_minister.jpg')}

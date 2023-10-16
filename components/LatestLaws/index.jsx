@@ -26,12 +26,12 @@ const LatestLaws = () => {
   }, [dispatch]);
 
   const filteredLaws = laws
-    .filter(
+    ?.filter(
       law =>
         law.law_type !== 'Subordinate Legislation' &&
         law.law_type !== 'Presidental Order' &&
         law.archiv_actid !== '0' &&
-        !law.title_act_help.toLowerCase().includes('mendment'),
+        !law.title_act_help?.toLowerCase()?.includes('mendment'),
     )
     .slice(0, 4);
 

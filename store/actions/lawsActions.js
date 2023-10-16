@@ -29,7 +29,8 @@ export const fetchLaws = () => {
   return dispatch => {
     dispatch(fetchLawsRequest());
     axios
-      .get('https://api.theinitiatorz.com/public/api/laws')
+      .get('http://api.pakistancode.gov.pk/public/api/laws')
+      // .get('https://api.theinitiatorz.com/public/api/laws')
       .then(response => {
         const laws = response.data;
         dispatch(fetchLawsSuccess(laws));

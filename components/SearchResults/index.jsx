@@ -24,11 +24,11 @@ const SearchResults = ({route}) => {
   const [filteredLaws, setFilteredLaws] = useState([]);
 
   // Data calls
-  const categories = useSelector(state => state.categories.categories);
+  const categories = useSelector(state => state?.categories?.categories);
   const categoryDetails = useSelector(
-    state => state.categoryDetails.categoryDetails,
+    state => state?.categoryDetails?.categoryDetails,
   );
-  const laws = useSelector(state => state.laws.laws);
+  const laws = useSelector(state => state?.laws?.laws);
 
   useEffect(() => {
     dispatch(fetchLaws());
@@ -37,46 +37,46 @@ const SearchResults = ({route}) => {
   }, [dispatch]);
 
   useEffect(() => {
+    if (!laws.length || !categories.length || !categoryDetails.length) return;
     // Start with all laws
     let filteredLawsList = [...laws];
 
     // Filter by category
     if (category) {
       const selectedCatid = categories.find(
-        cat => cat.catid == category,
+        cat => cat?.catid == category,
       )?.catid;
       if (selectedCatid) {
         const categoryDetailIds = categoryDetails
-          .filter(detail => detail.category == selectedCatid)
-          .map(detail => detail.ACTID);
-        filteredLawsList = filteredLawsList.filter(law =>
+          ?.filter(detail => detail?.category == selectedCatid)
+          .map(detail => detail?.ACTID);
+        filteredLawsList = filteredLawsList?.filter(law =>
           categoryDetailIds.some(id => String(id) === String(law.ACTID_help)),
         );
       }
     }
 
     // Filter by year
+    console.log('Year From Search: ', year);
     if (year) {
-      filteredLawsList = filteredLawsList.filter(
-        law => law.Year_help === year.toString(),
+      filteredLawsList = filteredLawsList?.filter(
+        law => law?.Year_help?.toString() === year.toString(),
       );
     }
 
     // Filter by search term
     if (searchTerm) {
-      filteredLawsList = filteredLawsList.filter(law =>
-        law.title_act_help
-          ? law.title_act_help.toLowerCase().includes(searchTerm.toLowerCase())
+      filteredLawsList = filteredLawsList?.filter(law =>
+        law?.title_act_help
+          ? law?.title_act_help
+              ?.toLowerCase()
+              .includes(searchTerm.toLowerCase())
           : false,
       );
     }
 
     setFilteredLaws(filteredLawsList);
   }, [laws, categoryDetails, categories, searchTerm, year]);
-
-  console.log('Search Term: ', searchTerm);
-  console.log('Category: ', category);
-  console.log('Year: ', year);
 
   const navigation = useNavigation();
 
@@ -93,14 +93,14 @@ const SearchResults = ({route}) => {
     <ScrollView style={styles.container}>
       <Text style={styles.pageTitle}>Search Results</Text>
       <View>
-        {filteredLaws.length !== 0 ? (
-          filteredLaws.map(
+        {filteredLaws?.length !== 0 ? (
+          filteredLaws?.map(
             law =>
-              law.title_act_help && (
+              law?.title_act_help && (
                 <TouchableOpacity
                   onPress={() => handlePress(law)}
                   style={styles.lawButton}
-                  key={law.ACTID_help}>
+                  key={law?.ACTID_help}>
                   <Text style={styles.lawButtonText}>{law.title_act_help}</Text>
                 </TouchableOpacity>
               ),

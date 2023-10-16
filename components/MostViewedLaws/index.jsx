@@ -16,7 +16,7 @@ const MostViewedLaws = () => {
 
   // Filtering laws based on SQL query conditions
   const filteredLaws = laws
-    .filter(
+    ?.filter(
       law =>
         law.law_type === 'Subordinate Legislation' && law.archiv_actid === '0',
     )

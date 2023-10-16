@@ -29,7 +29,7 @@ export const fetchCategories = () => {
   return dispatch => {
     dispatch(fetchCategoriesRequest());
     axios
-      .get('https://api.theinitiatorz.com/public/api/categories')
+      .get('http://api.pakistancode.gov.pk/public/api/categories')
       .then(response => {
         const categories = response.data;
         dispatch(fetchCategoriesSuccess(categories));
