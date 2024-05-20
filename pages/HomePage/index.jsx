@@ -211,6 +211,28 @@ const HomePage = () => {
           </TabBar>
           {renderImportantTabContent()}
         </Card>
+        {/* Img 1 */}
+        <Card style={styles.imgCard}>
+          <Image
+            style={styles.teamImage}
+            source={require('../../assets/img/azam-tarar.jpeg')}
+          />
+          <Text style={styles.teamTitle}>Mr. Azam Nazeer Tarar</Text>
+          <Text style={styles.teamDesignation}>
+            Federal Minister for Law and Justice
+          </Text>
+        </Card>
+        {/* Img 2 */}
+        <Card style={styles.imgCard}>
+          <Image
+            style={styles.teamImage}
+            source={require('../../assets/img/naeem-akbar.png')}
+          />
+          <Text style={styles.teamTitle}>Mr. Raja Naeem Akbar</Text>
+          <Text style={styles.teamDesignation}>
+            Secritary for Law and Justice
+          </Text>
+        </Card>
         {/*<Card style={styles.imgCard}>
           <Image
             style={styles.teamImage}
